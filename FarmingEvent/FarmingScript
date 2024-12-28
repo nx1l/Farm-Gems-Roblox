@@ -11,50 +11,44 @@ end)
 spawn(function()
     while wait(1) do
 
-        local LureFs = {}
-
+        local clientData = require(game.ReplicatedStorage.ClientModules.Core.ClientData)
+        local playerData = clientData.get_data()[tostring(game.Players.LocalPlayer)]
         local Event = workspace.HouseInteriors.furniture:GetChildren()
         for num, i in Event do
-            if string.find(i.Name, '1/nil') then
-                local originalString = i.Name
-                local Fs = string.gsub(originalString, game.Players.LocalPlayer.Name..'/1/nil/true/', "")
-                table.insert(LureFs, Fs)
-            else
-                break
+            if i:FindFirstChild('Lures2023NormalLure') then
+                local OriginStr = i.Name
+                _G.Fs = string.gsub(OriginStr, game.Players.LocalPlayer.Name..'/1/nil/true/', "")
             end
         end
         
         local a = 0
-        local clientData = require(game.ReplicatedStorage.ClientModules.Core.ClientData)
-        local playerData = clientData.get_data()[tostring(game.Players.LocalPlayer)]
-        for num, i_2 in LureFs do
-            for i, petData in pairs(playerData.inventory.food) do
-                if petData.kind == 'winter_2024_winter_deer_bait' and a == 0 then
-                    local args2 = {
-                        [1] = game:GetService("Players").LocalPlayer,
-                        [2] = i_2,
-                        [3] = "UseBlock",
-                        [4] = false,
-                        [5] = workspace:WaitForChild("PlayerCharacters"):WaitForChild(game.Players.LocalPlayer.Name)
-                    }          
-                    game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("HousingAPI/ActivateFurniture"):InvokeServer(unpack(args2))
-                    task.wait(.1)
-                    local args = {
-                        [1] = game:GetService("Players").LocalPlayer,
-                        [2] = i_2,
-                        [3] = "UseBlock",
-                        [4] = {
-                            ["bait_unique"] = petData.unique
-                        },
-                        [5] = workspace:WaitForChild("PlayerCharacters"):WaitForChild(game.Players.LocalPlayer.Name)
-                    }
-                   
-                    game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("HousingAPI/ActivateFurniture"):InvokeServer(unpack(args))
-                elseif a == 1 then
-                    print('0'..' - '..a)
-                    a = 0
-                    break       
-                end
+        for num_2, FoodData in playerData.inventory.food do
+            print(FoodData.kind)
+            if FoodData.kind =='winter_2024_winter_deer_bait' and a == 0 then
+                local args2 = {
+                    [1] = game:GetService("Players").LocalPlayer,
+                    [2] = _G.Fs,
+                    [3] = "UseBlock",
+                    [4] = false,
+                    [5] = workspace:WaitForChild("PlayerCharacters"):WaitForChild(game.Players.LocalPlayer.Name)
+                }          
+                game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("HousingAPI/ActivateFurniture"):InvokeServer(unpack(args2))
+                task.wait(.1)
+                local args = {
+                    [1] = game:GetService("Players").LocalPlayer,
+                    [2] = _G.Fs,
+                    [3] = "UseBlock",
+                    [4] = {
+                        ["bait_unique"] = FoodData.unique
+                    },
+                    [5] = workspace:WaitForChild("PlayerCharacters"):WaitForChild(game.Players.LocalPlayer.Name)
+                }
+               
+                game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("HousingAPI/ActivateFurniture"):InvokeServer(unpack(args))
+            elseif a == 1 then
+                print('0'..' - '..a)
+                a = 0
+                break
             end
         end
 
