@@ -10,7 +10,7 @@ pcall(function()
                 end
             end
         end
-        repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.NewsApp.EnclosingFrame.MainFrame.Contents.PlayButton.Visible == true
+        repeat wait(1) print("waiting...") until game:GetService("Players").LocalPlayer.PlayerGui.NewsApp.EnclosingFrame.MainFrame.Contents.PlayButton.Visible == true
         print('play button click✅')
         local Button = game:GetService("Players").LocalPlayer.PlayerGui.NewsApp.EnclosingFrame.MainFrame.Contents.PlayButton
         button_click(Button)
