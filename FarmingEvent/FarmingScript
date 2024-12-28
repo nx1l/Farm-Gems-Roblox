@@ -10,7 +10,9 @@ local HomeReg = game:GetService("Players").LocalPlayer.PlayerGui.ExtraButtonsApp
 local clientData = require(game.ReplicatedStorage.ClientModules.Core.ClientData)
 local playerData = clientData.get_data()[tostring(game.Players.LocalPlayer)]
 task.spawn(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/nx1l/Farm-Gems-Roblox/refs/heads/main/FarmingEvent/ClickPlaying"))()
+    repeat
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/nx1l/Farm-Gems-Roblox/refs/heads/main/FarmingEvent/ClickPlaying"))()
+    until game:GetService("Players").LocalPlayer.PlayerGui.BucksIndicatorApp.Enabled == true
 end)
 
 spawn(function()
