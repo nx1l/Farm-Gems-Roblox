@@ -1,5 +1,4 @@
 pcall(function()
-    repeat
         function button_click (button_obj)
             local events = {"MouseButton1Down", "MouseButton1Click", "Activated"}
             
@@ -17,7 +16,6 @@ pcall(function()
         button_click(Button)
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/a5386bfa9bb03ae1da997e3078394366.lua"))()
         task.wait(10)
-    until game:GetService("Players").LocalPlayer.PlayerGui.BucksIndicatorApp.Enabled == true
 end)
 repeat wait() until game:GetService("ReplicatedStorage").API:WaitForChild('AdminAPI/GetCmdrPlayerInventoryItems')
 print('Done!✅')
