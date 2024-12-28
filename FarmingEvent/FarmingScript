@@ -10,12 +10,26 @@ end)
 
 spawn(function()
     while wait(1) do
-
+    pcall(function()
+        local args = {
+            [1] = {
+                [1] = {
+                    ["kind"] = "lures_2023_normal_lure",
+                    ["properties"] = {
+                        ["cframe"] = CFrame.new(9.10009765625, 0, -21, 1, -3.82137093032941e-15, 8.742277657347586e-08, 3.82137093032941e-15, 1, 0, -8.742277657347586e-08, 0, 1)
+                    }
+                }
+            }
+        }
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("HousingAPI/BuyFurnitures"):InvokeServer(unpack(args))
+        task.wait(1)
         local clientData = require(game.ReplicatedStorage.ClientModules.Core.ClientData)
         local playerData = clientData.get_data()[tostring(game.Players.LocalPlayer)]
         local Event = workspace.HouseInteriors.furniture:GetChildren()
         for num, i in Event do
             if i:FindFirstChild('Lures2023NormalLure') then
+                print('you have lure!')
                 local OriginStr = i.Name
                 _G.Fs = string.gsub(OriginStr, game.Players.LocalPlayer.Name..'/1/nil/true/', "")
             end
@@ -51,7 +65,7 @@ spawn(function()
                 break
             end
         end
-
+    end)
         repeat
             task.wait(10)
             local args = {
