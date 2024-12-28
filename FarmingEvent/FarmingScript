@@ -2,12 +2,62 @@ print('12.0')
 local Upgrade = 'charge_power'
 local HomeGUI = game:GetService("Players").LocalPlayer.PlayerGui.NewsApp
 local HomeReg = game:GetService("Players").LocalPlayer.PlayerGui.ExtraButtonsApp
+local clientData = require(game.ReplicatedStorage.ClientModules.Core.ClientData)
+local playerData = clientData.get_data()[tostring(game.Players.LocalPlayer)]
 task.spawn(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/nx1l/Farm-Gems-Roblox/refs/heads/main/FarmingEvent/ClickPlaying"))()
 end)
 
 spawn(function()
     while wait(1) do
+
+        local LureFs = {}
+
+        local Event = workspace.HouseInteriors.furniture:GetChildren()
+        for num, i in Event do
+            if string.find(i.Name, '1/nil') then
+                local originalString = i.Name
+                local Fs = string.gsub(originalString, game.Players.LocalPlayer.Name..'/1/nil/true/', "")
+                table.insert(LureFs, Fs)
+            else
+                break
+            end
+        end
+        
+        local a = 0
+        local clientData = require(game.ReplicatedStorage.ClientModules.Core.ClientData)
+        local playerData = clientData.get_data()[tostring(game.Players.LocalPlayer)]
+        for i, petData in pairs(playerData.inventory.food) do
+            if petData.kind == 'winter_2024_winter_deer_bait' and a == 0 then
+                for num, i_2 in LureFs do
+                    local args2 = {
+                        [1] = game:GetService("Players").LocalPlayer,
+                        [2] = i_2,
+                        [3] = "UseBlock",
+                        [4] = false,
+                        [5] = workspace:WaitForChild("PlayerCharacters"):WaitForChild(game.Players.LocalPlayer.Name)
+                    }
+                    
+                    game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("HousingAPI/ActivateFurniture"):InvokeServer(unpack(args2))
+                    task.wait(.1)
+                    local args = {
+                        [1] = game:GetService("Players").LocalPlayer,
+                        [2] = i_2,
+                        [3] = "UseBlock",
+                        [4] = {
+                            ["bait_unique"] = petData.unique
+                        },
+                        [5] = workspace:WaitForChild("PlayerCharacters"):WaitForChild(game.Players.LocalPlayer.Name)
+                    }
+                   
+                    game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("HousingAPI/ActivateFurniture"):InvokeServer(unpack(args))
+                end
+            elseif a == 1 then
+                a = 0
+                break       
+            end
+        end
+
         repeat
             task.wait(10)
             local args = {
@@ -39,8 +89,6 @@ spawn(function()
         while wait() do
             local UpgradesGUI = game:GetService("Players").LocalPlayer.PlayerGui.FrostclawsRevengeUpgradeApp
             if RewardGUI.Visible == true and GingerCountGUI.Enabled == true or GingerCountGUI.Enabled == true then
-                task.wait(5)
-                print('again start')
                 break
             elseif UpgradesGUI.Enabled == true and Upgrade == 'charge_power' then
                 task.wait(1)
