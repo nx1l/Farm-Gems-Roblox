@@ -1,4 +1,6 @@
 pcall(function()
+        print('script is starting!')
+        task.wait(30)
         function button_click (button_obj)
             local events = {"MouseButton1Down", "MouseButton1Click", "Activated"}
             
