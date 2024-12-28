@@ -37,7 +37,6 @@ spawn(function()
         
         local a = 0
         for num_2, FoodData in playerData.inventory.food do
-            print(FoodData.kind)
             if FoodData.kind =='winter_2024_winter_deer_bait' and a == 0 then
                 local args2 = {
                     [1] = game:GetService("Players").LocalPlayer,
