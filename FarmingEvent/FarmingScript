@@ -9,7 +9,12 @@ end)
 spawn(function()
     while wait(1) do
         repeat
-            task.wait(10)  
+            task.wait(10)
+            local args = {
+                [1] = "frostclaws_revenge"
+            }       
+            game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("MinigameAPI/LobbyCreate"):InvokeServer(unpack(args))
+            task.wait(1)
             local args = {
                 [1] = {
                     ["startup_settings"] = {}
