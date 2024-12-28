@@ -27,17 +27,16 @@ spawn(function()
         local a = 0
         local clientData = require(game.ReplicatedStorage.ClientModules.Core.ClientData)
         local playerData = clientData.get_data()[tostring(game.Players.LocalPlayer)]
-        for i, petData in pairs(playerData.inventory.food) do
-            if petData.kind == 'winter_2024_winter_deer_bait' and a == 0 then
-                for num, i_2 in LureFs do
+        for num, i_2 in LureFs do
+            for i, petData in pairs(playerData.inventory.food) do
+                if petData.kind == 'winter_2024_winter_deer_bait' and a == 0 then
                     local args2 = {
                         [1] = game:GetService("Players").LocalPlayer,
                         [2] = i_2,
                         [3] = "UseBlock",
                         [4] = false,
                         [5] = workspace:WaitForChild("PlayerCharacters"):WaitForChild(game.Players.LocalPlayer.Name)
-                    }
-                    
+                    }          
                     game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("HousingAPI/ActivateFurniture"):InvokeServer(unpack(args2))
                     task.wait(.1)
                     local args = {
@@ -51,11 +50,11 @@ spawn(function()
                     }
                    
                     game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("HousingAPI/ActivateFurniture"):InvokeServer(unpack(args))
-                    print("Box lure is completed")
+                elseif a == 1 then
+                    print('0'..' - '..a)
+                    a = 0
+                    break       
                 end
-            elseif a == 1 then
-                a = 0
-                break       
             end
         end
 
