@@ -51,6 +51,7 @@ spawn(function()
                     }
                    
                     game:GetService("ReplicatedStorage"):WaitForChild("API"):WaitForChild("HousingAPI/ActivateFurniture"):InvokeServer(unpack(args))
+                    print("Box lure is completed")
                 end
             elseif a == 1 then
                 a = 0
