@@ -2,6 +2,7 @@ repeat wait() until game:IsLoaded()
     game:GetService("Players").LocalPlayer.Idled:connect(function()
     game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 end)
+print("anti-afk is used")
 print('12.0')
 local Upgrade = 'charge_power'
 local HomeGUI = game:GetService("Players").LocalPlayer.PlayerGui.NewsApp
