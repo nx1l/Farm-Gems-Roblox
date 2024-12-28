@@ -39,6 +39,8 @@ spawn(function()
         while wait() do
             local UpgradesGUI = game:GetService("Players").LocalPlayer.PlayerGui.FrostclawsRevengeUpgradeApp
             if RewardGUI.Visible == true and GingerCountGUI.Enabled == true or GingerCountGUI.Enabled == true then
+                task.wait(5)
+                print('again start')
                 break
             elseif UpgradesGUI.Enabled == true and Upgrade == 'charge_power' then
                 task.wait(1)
